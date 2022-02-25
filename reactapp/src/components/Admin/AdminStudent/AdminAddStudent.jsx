@@ -268,7 +268,7 @@ const AdminAddStudent = () => {
             <div>
               <label htmlFor="phoneNumber">Phone no </label>
               <input
-                id="phoneNumber"
+                id="phoneNumber1"
                 type="text"
                 pattern="\d*"
                 name="phoneNumber"
@@ -285,7 +285,7 @@ const AdminAddStudent = () => {
             <div>
               <label htmlFor="alternativeNumber">Alternate Phone No </label>
               <input
-                id="alternativeNumber"
+                id="phoneNumber2"
                 type="text"
                 pattern="\d*"
                 name="alternativeNumber"

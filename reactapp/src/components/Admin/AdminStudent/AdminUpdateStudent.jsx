@@ -121,7 +121,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="firstName">First Name </label>
               <input
-                id="firstName"
+                id="editfirstName"
                 type="text"
                 name="firstName"
                 placeholder="Enter your first name"
@@ -137,7 +137,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="lastName">Last Name </label>
               <input
-                id="lastName"
+                id="editlastName"
                 type="text"
                 name="lastName"
                 placeholder="Enter your last name"
@@ -152,7 +152,7 @@ export default function AdminUpdateStudent() {
             <div className="genderDiv">
               <label htmlFor="gender">Gender </label>
               <select
-                id="gender"
+                id="editGender"
                 name="gender"
                 value={formik.values.gender || ""}
                 onChange={formik.handleChange}
@@ -169,7 +169,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="fatherName">Father Name </label>
               <input
-                id="fatherName"
+                id="editfatherName"
                 type="text"
                 name="fatherName"
                 placeholder="Enter your father name"
@@ -185,7 +185,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="motherName">Mother Name </label>
               <input
-                id="motherName"
+                id="editmotherName"
                 type="text"
                 name="motherName"
                 placeholder="Enter your mother name"
@@ -201,7 +201,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="phoneNumber">Phone no </label>
               <input
-                id="phoneNumber"
+                id="editphoneNumber1"
                 type="text"
                 pattern="\d*"
                 name="phoneNumber"
@@ -218,7 +218,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="alternativeNumber">Alternate Phone No </label>
               <input
-                id="alternativeNumber"
+                id="editphoneNumber2"
                 type="text"
                 pattern="\d*"
                 name="alternativeNumber"
@@ -236,7 +236,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="emailId">Email Id </label>
               <input
-                id="emailId"
+                id="editEmailId"
                 type="email"
                 name="emailId"
                 placeholder="Enter your Email Id"
@@ -252,7 +252,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="age">Age </label>
               <input
-                id="age"
+                id="edirAge"
                 type="text"
                 pattern="\d*"
                 name="age"
@@ -277,7 +277,7 @@ export default function AdminUpdateStudent() {
           <div>
             <label htmlFor="houseNo">House no </label>
             <input
-              id="houseNo"
+              id="editHouseNo"
               type="text"
               name="houseNo"
               placeholder="Enter house no"
@@ -293,7 +293,7 @@ export default function AdminUpdateStudent() {
           <div>
             <label htmlFor="streetName">Street Name </label>
             <input
-              id="streetName"
+              id="editStreetName"
               type="text"
               name="streetName"
               placeholder="Enter street name"
@@ -309,7 +309,7 @@ export default function AdminUpdateStudent() {
           <div>
             <label htmlFor="areaName">Area Name </label>
             <input
-              id="areaName"
+              id="editAreaName"
               type="text"
               name="areaName"
               placeholder="Enter area name"
@@ -325,7 +325,7 @@ export default function AdminUpdateStudent() {
           <div>
             <label htmlFor="nationality">Nationality </label>
             <input
-              id="nationality"
+              id="editNationality"
               type="text"
               name="nationality"
               placeholder="Enter your nationality"
@@ -341,7 +341,7 @@ export default function AdminUpdateStudent() {
           <div>
             <label htmlFor="state">State </label>
             <input
-              id="state"
+              id="editState"
               type="text"
               name="state"
               placeholder="Enter state"
@@ -357,7 +357,7 @@ export default function AdminUpdateStudent() {
           <div>
             <label htmlFor="pincode">Pincode </label>
             <input
-              id="pincode"
+              id="editPincode"
               type="text"
               pattern="\d*"
               name="pincode"
@@ -381,7 +381,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="academyName">Enrolling Course Name</label>
               <input
-                id="academyName"
+                id="editAcademyName"
                 type="text"
                 name="academyName"
                 disabled={true}
@@ -392,7 +392,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="enrolledCourse">Enrolling Course Name</label>
               <input
-                id="enrolledCourse"
+                id="editEnrolledCourse"
                 type="text"
                 name="enrolledCourse"
                 disabled={true}
@@ -403,7 +403,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="joinedDate">Joining Date </label>
               <input
-                id="joinedDate"
+                id="editJoinedDate"
                 name="joinedDate"
                 disabled={true}
                 defaultValue={formik.values.joinedDate || ""}
@@ -413,7 +413,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="endDate">End Date </label>
               <input
-                id="endDate"
+                id="editEndDate"
                 name="endDate"
                 disabled={true}
                 defaultValue={formik.values.endDate || ""}
