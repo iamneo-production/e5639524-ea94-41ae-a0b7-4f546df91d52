@@ -17,15 +17,7 @@ const fetchData = async () => {
     console.log(json);
     return json;
 }
-// const fetchDeleteData = async (id) => {
-//     const res = await fetch('https://8080-fbfbccffdeabccbedbeeafefedbfbafdaec.examlyiopb.examly.io/course/'+id,{method:'DELETE'});
-//     console.log(res);
-//     //alert(res);
-//     const json = await res.json();
-//     console.log(json);
-//     //alert(json);
-//     return json.message;
-// }
+
 
 function AdminCourse(props) {
     const [courseList, setCourseList] = useState([])
