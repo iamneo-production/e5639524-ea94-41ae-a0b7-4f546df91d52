@@ -31,6 +31,11 @@ class UserService {
     return axios.delete(REST_API_URL + "/admin/deleteStudent/" + id);
   }
   //Course
+
+  addCourse(course){
+    return axios.post(REST_API_URL + '/admin/addCourse', course);
+  }
+  
   viewCourse() {
     return axios.get(REST_API_URL + '/admin/viewCourse');
   }
