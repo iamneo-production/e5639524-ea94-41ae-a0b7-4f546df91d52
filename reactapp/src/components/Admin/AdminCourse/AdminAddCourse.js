@@ -54,7 +54,7 @@ export default function AdminAddCourse() {
         }),
         onSubmit : (values) =>{
           UserService.addCourse(values).then((res) => {
-            alert("New Course Added Succesfully");
+            alert("New Course Added Successfully");
             console.log(res.data);
           });
             console.log(formik.values);
