@@ -25,7 +25,7 @@ export default class Auth extends Component {
             <Route path="adminStudent" element={<AdminStudent />}></Route>
             <Route path="adminStudent/adminAddStudent" element={<AdminAddStudent />}/>
             <Route path="adminStudent/updateStudent/:studentId" element={<AdminUpdateStudent />}/>
-            <Route path="adminCourse" element={<AdminCourse />}/>
+            <Route path="/AdminCourse" component={<AdminCourse />} />
           </Route>
           <Route path="/*" element={<ErrorPage />}></Route>
         </Routes>
