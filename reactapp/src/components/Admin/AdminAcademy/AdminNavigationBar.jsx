@@ -4,35 +4,56 @@ import CourseIcon from "../../../icon/courseIcon.png"
 import StudentIcon from "../../../icon/studentIcon.png"
 import LogoutIcon from "../../../icon/logoutIcon.png"
 import {Link, Outlet} from 'react-router-dom'
-import ".././App.css";
+import { Navbar, Nav } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ".././Admin.css";
 
 export default function AdminAcademy() {
   return (
-    <div className="adminPanel">
-      <nav className="navbar">
-        <ul>
-          <li>
-            <p className="title">Arts and Crafts Academy Admission</p>
-          </li>
-          <li>
-            <img id="academyImg" src={AcademyIcon} alt="" />
-            <Link to="">Academy</Link>
-          </li>
-          <li>
-            <img id="courseImg" src={CourseIcon} alt="" />
+    <div>
+      <Navbar collapseOnSelect expand="lg" className="admin-nav" variant="dark">
+        <Navbar.Brand href="#home">Arts and Crafts Academy</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="navbar-link" >
+            <img
+              alt="academy"
+              src={AcademyIcon}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}
+            <Link to="adminAcademy">Academy</Link>
+            <img
+            alt="academy"
+            src={CourseIcon}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{' '}
             <Link to="adminCourse">Course</Link>
-          </li>
-          <li>
-            <img id="studentImg" src={StudentIcon} alt="" />
+            <img
+            alt="student"
+            src={StudentIcon}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{' '}
             <Link to="adminStudent">Student</Link>
-          </li>
-          <li>
-            <img id="logoutImg" src={LogoutIcon} alt="" />
-            <Link to="/login">Logout</Link>
-          </li>
-        </ul>
-      </nav>
-     <Outlet/>
+          </Nav>
+          <Nav className="nav-logout">
+            <img
+              alt="logout"
+              src={LogoutIcon}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}
+              <Link to="/login">Logout</Link>
+        </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <Outlet/>
     </div>
   );
 }

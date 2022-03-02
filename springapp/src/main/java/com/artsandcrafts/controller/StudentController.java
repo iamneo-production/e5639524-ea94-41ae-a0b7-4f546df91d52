@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.artsandcrafts.model.EnrolledCourse;
 import com.artsandcrafts.model.Student;
+import com.artsandcrafts.request.StudentReq;
 import com.artsandcrafts.service.StudentService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -25,7 +27,7 @@ public class StudentController {
 	StudentService studentService;
 	
 	@PostMapping("/addStudent")
-	public Student addStudent(@RequestBody Student student) {
+	public Student addStudent(@RequestBody StudentReq student) {
 	    return studentService.addStudent(student);
 	}
 
@@ -54,13 +56,13 @@ public class StudentController {
         return studentService.deleteStudent(id);
     }
 	
-	@GetMapping("/checkMailId/{emailId}")
+	@GetMapping("/checkStudentMailId/{emailId}")
 	public String emailValidation(@PathVariable String emailId) {
 		Boolean bool = studentService.existsByEmailId(emailId);
 		if(bool)
-			return "false";
+			return "true";
 		else 
-			return "true";  
+			return "false";  
     }
 
 }

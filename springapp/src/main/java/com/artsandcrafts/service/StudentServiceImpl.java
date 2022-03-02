@@ -6,17 +6,37 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.artsandcrafts.dao.EnrolledCourseRepo;
 import com.artsandcrafts.dao.StudentRepo;
+import com.artsandcrafts.model.EnrolledCourse;
 import com.artsandcrafts.model.Student;
+import com.artsandcrafts.request.StudentReq;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 	@Autowired
 	StudentRepo studentRepo;
 	
+	@Autowired
+	EnrolledCourseRepo enrolledCourseRepo;
+	
 	@Override
-	public Student addStudent(Student student) {
-		return studentRepo.save(student);
+	public Student addStudent(StudentReq studentReq) {
+		
+		Student student = new Student(studentReq);
+		student = studentRepo.save(student);
+		
+		//EnrolledCourse courseReq = new EnrolledCourse(studentReq);
+		EnrolledCourse course = new EnrolledCourse();
+		course.setAcademyName(studentReq.getAcademyName());
+		course.setEnrolledCourse(studentReq.getEnrolledCourse());
+		course.setJoinedDate(studentReq.getJoinedDate());
+		course.setEndDate(studentReq.getEndDate());
+		course.setStudent(student);
+		enrolledCourseRepo.save(course);
+		
+		return student;
+		
 	}
 
 	@Override

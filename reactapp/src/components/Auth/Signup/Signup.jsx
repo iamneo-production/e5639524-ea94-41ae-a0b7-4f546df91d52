@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { Link, useNavigate  } from 'react-router-dom';
 import '../Auth.css'
 import UserService from '../../../service/UserService';
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {
     let navigate = useNavigate();
@@ -36,10 +38,17 @@ export default function Signup() {
             .oneOf([Yup.ref('password'), null], 'Passwords not match !')
         }),
         onSubmit: values => {
-            UserService.createUser(values).then(res =>{
-                alert("User Created successfuly");
-                navigate("/login");
-            });
+            UserService.checkUserMailId(values.email).then(res =>{
+                if(res.data) {
+                    toast.warn('Email Id already taken');                
+                }else {
+                    toast.success('Creating Accout...');
+                    UserService.createUser(values).then(res =>{
+                        toast.success('Registration success...');
+                        navigate("/login");
+                    });
+                }
+            }); 
         },
     });
   return (
@@ -48,10 +57,12 @@ export default function Signup() {
             <div className="signup-grid">
                 <div className="signup-left">
                     <h1 className="welcome">Arts and Crafts Academy</h1>
-                    <img className="signup-img" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" alt="signup img" />
+                    <div className="signupImgDiv">
+                        <img className="signup-img" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" alt="signup img" />
+                    </div>
                 </div>
                 <div className="signup-right">
-                <h1>SignUp</h1>
+                <h1 className="signup-h">SignUp</h1>
                     <form onSubmit={formik.handleSubmit}>
                         <div>
                             <label htmlFor="email">Email Id</label>
@@ -128,12 +139,13 @@ export default function Signup() {
                                 ) : null
                             }
                         </div>
-                        <h4>Already a User? <Link to="/login">Login</Link> </h4>
-                        <button id="submitButton" type="submit">Submit</button>
+                        <div className="signup-text">Already a User? <Link to="/login">Login</Link> </div>
+                        <div><button id="submitButton" type="submit">Submit</button></div>
                     </form>
                 </div>
             </div>
         </div>
+        <ToastContainer />
     </div> 
    );
 }
