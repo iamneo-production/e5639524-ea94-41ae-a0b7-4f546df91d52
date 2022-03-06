@@ -3,7 +3,7 @@ import axios from "axios";
 const REST_API_URL = "http://localhost:8081";
 class UserService {
   createUser(user) {
-    return axios.post(REST_API_URL + "/signup", user);
+    return axios.post(REST_API_URL + "user/signup", user);
   }
   login(email, password) {
     return axios.get(
@@ -31,6 +31,11 @@ class UserService {
     return axios.delete(REST_API_URL + "/admin/deleteStudent/" + id);
   }
   //Course
+
+  addCourse(course){
+    return axios.post(REST_API_URL + '/admin/addCourse', course);
+  }
+  
   viewCourse() {
     return axios.get(REST_API_URL + '/admin/viewCourse');
   }

@@ -11,6 +11,10 @@ import AdminAddStudent from "../Admin/AdminStudent/AdminAddStudent";
 import ErrorPage from "../Error Page/ErrorPage";
 import AdminUpdateStudent from "../Admin/AdminStudent/AdminUpdateStudent";
 import HomePage from "../Home Page/HomePage";
+import AdminUpdateAcademy from "../Admin/AdminAcademy/AdminUpdateAcademy";
+import AdminAddAcademy from "../Admin/AdminAcademy/AdminAddAcademy";
+import AdminAddCourse from "../Admin/AdminCourse/AdminAddCourse";
+import AdminUpdateCourse from "../Admin/AdminCourse/AdminUpdateCourse";
 export default class Auth extends Component {
   render() {
     return (
@@ -21,11 +25,15 @@ export default class Auth extends Component {
           <Route path="/login" element={<Login />} ></Route>
           <Route path="/viewAcademy" element={<ViewAcademy />}></Route>
           <Route path="admin" element={<AdminNavigationBar />}>
-            <Route path="" element={<AdminAcademy />}/>
+            <Route path="adminAcademy" element={<AdminAcademy />}/>
+            <Route path="adminAcademy/adminAddAcademy" element={<AdminAddAcademy />}/>
             <Route path="adminStudent" element={<AdminStudent />}></Route>
             <Route path="adminStudent/adminAddStudent" element={<AdminAddStudent />}/>
             <Route path="adminStudent/updateStudent/:studentId" element={<AdminUpdateStudent />}/>
-            <Route path="/AdminCourse" component={<AdminCourse />} />
+            <Route path="adminCourse" element={<AdminCourse />}/>
+            <Route path="adminCourse/adminAddCourse" element={<AdminAddCourse />}/>
+            <Route path="adminCourse/updateCourse/:courseId" element={<AdminUpdateCourse />}/>
+            <Route path="adminAcademy/updateAcademy/:academyId" element={<AdminUpdateAcademy/>}/>
           </Route>
           <Route path="/*" element={<ErrorPage />}></Route>
         </Routes>

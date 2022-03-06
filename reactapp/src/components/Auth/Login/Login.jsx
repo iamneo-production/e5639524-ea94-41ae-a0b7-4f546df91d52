@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { Link, useNavigate } from 'react-router-dom';
 import '../Auth.css'
 import UserService from '../../../service/UserService';
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
     let navigate = useNavigate();
@@ -24,12 +26,15 @@ export default function Login() {
         ),
         onSubmit: values => {
             UserService.login(values.email, values.password).then(res =>{
-                if(res.data[0].userRole === 'admin') {
-                    navigate("/admin");
-                }else if(res.data[0].userRole === 'user'){
+                console.log(res.data);
+                if(res.data.userRole === 'admin') {
+                    toast.success('Welcome back...');
+                    navigate("/admin/adminAcademy");
+                }else if(res.data.userRole === 'user'){
+                    toast.success('Welcome back...');
                     navigate("/viewAcademy");
                 }else {
-                    alert("Invalid Credentials");
+                    toast.warn("Invalid Credentials");
                 }
             });
         },
@@ -45,38 +50,43 @@ export default function Login() {
                 <div className="login-right">
                 <h1 className="login-h">Login</h1>
                     <form onSubmit={formik.handleSubmit}>
-                        <label htmlFor="email">Email Id</label>
-                        <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.email} />
-                        {    
-                            formik.touched.email && formik.errors.email ? (
-                                <div className="error">{formik.errors.email}</div>
-                            ) : null
-                        }
+                        <div>
+                            <label htmlFor="email">Email Id</label>
+                            <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.email} />
+                            {    
+                                formik.touched.email && formik.errors.email ? (
+                                    <div className="error">{formik.errors.email}</div>
+                                ) : null
+                            }
+                        </div>
+                        <div>
                         <label htmlFor="password">Password</label>
-                        <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.password} />
-                        {
-                            formik.touched.password && formik.errors.password ? (
-                                <div className="error">{formik.errors.password}</div>
-                            ) : null
-                        }
-                        <h4>Are you new user? <Link to="/signup">Signup</Link> </h4> 
+                            <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.password} />
+                            {
+                                formik.touched.password && formik.errors.password ? (
+                                    <div className="error">{formik.errors.password}</div>
+                                ) : null
+                            }
+                        </div>
+                        <div className="signup-text">Are you new user? <Link to="/signup">Signup</Link> </div> 
                         <button id="loginButton" type="submit">Login</button>
                     </form>
                 </div>
             </div>
         </div>
+        <ToastContainer />
     </div> 
   );
 }

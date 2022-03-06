@@ -12,14 +12,19 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 @RestController
-@RequestMapping("/course") //url
-@CrossOrigin //security purposes
+@RequestMapping("/admin")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @PostMapping("/addCourse")
+	public String add(@RequestBody AddCourse addCourse) {
+		addCourseService.saveAddCourse(addCourse);
+		return "New Course Added";
+	}
 
-    @GetMapping("/list") //url
+    @GetMapping("/viewCourse")
     public List<Course> list(){
         return courseService.getAll();
     }

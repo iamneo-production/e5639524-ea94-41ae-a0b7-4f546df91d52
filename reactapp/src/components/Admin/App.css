@@ -8,27 +8,6 @@
 h1 {
   color: #362874;
 }
-.navbar {
-  padding-top: 2vh;
-  padding-bottom: 1vh;
-  color: white;
-  display: flex;
-  text-align: right;
-  background-color: #362874;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-nav a {
-  text-decoration: none;
-  color: white;
-  padding: 1rem;
-}
-nav ul {
-  display: flex;
-  list-style-type: none;
-}
-.main {
-  padding: 1rem;
-}
 #courseImg{
   width: 5vh;
   height: 4.5vh;
@@ -43,14 +22,7 @@ nav ul {
   height: 3.5vh;
   margin-left: 26vw;
 }
-#academyImg {
-  width: 5vh;
-  height: 5vh;
-  margin-right: 1vh;
-}
-#academyImg {
-  margin-left: 18vw;
-}
+
 #adminCourse,
 #adminStudents,
 #userEnrolledCourse {
@@ -63,10 +35,9 @@ nav ul {
 }
 table {
   border-collapse: collapse;
-  width: 90vw;
-  margin-left: 10vh;
-  margin-right: 10vh;
-  margin-bottom: 10vh;
+  width: 85vw;
+  margin-top: 10vh;
+  margin-left: 15vh;
   box-shadow: 1px 1px 10px #3628748a;
 }
 th {
@@ -83,27 +54,25 @@ tr:nth-child(even) {
   background-color: #36287425;
 }
 .searchBar {
-  margin-top: 4vh;
   margin-bottom: 4vh;
 }
 .search {
+  margin-top: 1vw;
   margin-left: 36vw;
   border-width: 1px;
   width: 20vw;
 	height: 6vh;
 }
-#addStudentBtn a {
+#addStudentBtn a, #addAcademyBtn a, #addCourseBtn a  {
   text-decoration: none;
   padding: 10px;
   padding-bottom: 15px;
-  position:fixed;
-	bottom: 5vh;
-	right: 2vh;
+	float: right;
+  margin-right: 2vw;
 	background-color: #362874;
 	color:#FFF;
   border: none;
   border-radius: 1vh;
-	text-align:center;
 	box-shadow: 1px 1px 10px #3628748a;
 }
 #addStudent,
@@ -123,7 +92,7 @@ tr:nth-child(even) {
   background-color: #362874;
   box-shadow: 1px 1px 1px #3628748a;
 }
-#studentSearch {
+#studentSearch, #academySearch, #courseSearch{
   border: none;
   width: 6vw;
   border-radius: 1vh;
@@ -137,11 +106,18 @@ tr:nth-child(even) {
   box-shadow: 1px 1px 10px #3628748a;
 }
 #adminEditStudent {
-  width: 30px;
+  width: 5vw;
+  margin-left: 1vw;
+  border: none;
+  background-color: rgb(16, 145, 16);
+  box-shadow: 1px 1px 10px #3628748a;
 }
 #adminDeleteStudent {
-  margin-left: 20px;
-  width: 30px;
+  width: 5vw;
+  margin-left: 2vw;
+  background-color: red;
+  border: none;
+  box-shadow: 1px 1px 10px #3628748a;
 }
 #error {
   color: red;
@@ -164,20 +140,21 @@ input, select {
   float: right;
   margin-top: 3vh;
 }
-select {
-  margin-left: 15px;
-}
-.genderDiv {
-  margin-top: 15px;
-  margin-right: 15px;
+.addDetails {
+  margin-left: 2vw;
 }
 label {
   font-size: 15px;
   color: #362874;
+  margin-right: 1vw;
 }
-.personalInfo, .personalInfoContainer, .addressInfo, .addressInfoContainer, .courseInfo, .courseInfoContainer {
+.personalInfo, .personalDetails, .addressInfo, .addressDetails, .courseInfo, .courseInfoContainer {
   display: grid;
+  text-align: end;
   grid-template-columns: auto auto
+}
+.personalDetails > div, .addressDetails > div {
+  margin: 3vh;
 }
 .personalInfo, .addressInfo {
   width: 90vw;
@@ -193,7 +170,6 @@ label {
   margin-left: 2vw;
   margin-top: 5vh;
   text-align: end;
-  padding: 5vh;
   border-radius: 10vh;
   box-shadow: 1px 1px 10px #3628748a;
 }
@@ -211,83 +187,61 @@ label {
 .personalInfo-left, .addressInfo-left, .courseInfo-left {
   text-align: center;
 }
-.courseInfoContainer > div {
-  margin-top: 8vh;
-}
-.AdmincourseGrid {
-  width: 500px;
-  height: 220px;
-  margin: 20px;
-  border-radius: 25px;
-  margin-left: 100px;
-  margin-top: 100px;
-  border-width: .5px;
-  box-shadow: 1px 1px 10px #3628748a;
-}
-.AdminContentGrid > div {
-  padding: 10px;
-}
-.courseList {
-  margin-left: 5vw;
-  display: grid;
-  grid-template-columns: auto auto auto;
-}
-#editCourse {
-  width: 30px;
-  margin-left: 380px;
-  padding: 10px;
-}
-#deleteCourse {
-  width: 30px;
-  margin-left: 20px;
-  margin-bottom: 10px;
+.courseInfo > div {
+  margin: 8vh;
 }
 .searchBar {
   margin-top: 25px;
   text-align: center;
 }
+.searchBar .search {
+  height: 6vh;
+  margin-left: 15vw;
+}
 .searchBar > input {
   height: 35px;
-  margin-left: 20px;
+  margin-left: 1vw;
 }
-#academySearch {
-  width: 250px;
-  margin-left: 150px;
-}
-#academySearchBtn {
-  height: 40px;
-  width: 100px;
-}
-#AcademySearch {
-  width: 250px;
-}
-.AcademyList {
+
+.MainDiv{
   display: grid;
-  grid-template-columns: auto auto auto;
-}
-.academyGrid {
-  width: 350px;
-  height: 350px;
-  border-radius: 25px;
-  margin-left: 4vw;
-  margin-top: 100px;
+  grid-template-columns: auto auto;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-top: 5vh;
+  text-align: auto;
+  padding: 5vh;
+  border-radius: 10vh;
   box-shadow: 1px 1px 10px #3628748a;
+} 
+label{
+  font-size: medium;
+  font-weight: 450;
+}  
+.MainDiv div{
+  font-size: medium;
+  text-align: end;
+  padding: 3.25vh;
+}  
+#addCourse, #updateCourse, #updateAcademy, #addAcademy {
+  border: none;
+  margin-top: 4vh;
+  margin-left: 30vw;
+  width: 9vw;
+  border-radius: 10px;
+  height: 6vh;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #362874;
+  box-shadow: 1px 1px 1px #3628748a;
 }
-.academyName, .academyImg {
-  margin-left: 5px;
-}
-#editAcademy {
-  width: 30px;
-  margin-left: 250px;
-}
-#deleteAcademy {
-  width: 30px;
-  margin-left: 20px;
-}
-#academyImgView {
-  width: 350px;
-  height: 250px;
-  object-fit: fill;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+.headingAddCourse {
+  padding: 1vw;
+  font-weight: 750;
+  margin-top: 1vw;
+  color: #362874;
+  text-align: center;
 }

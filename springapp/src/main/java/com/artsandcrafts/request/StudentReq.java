@@ -1,24 +1,11 @@
-package com.artsandcrafts.model;
+package com.artsandcrafts.request;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import com.artsandcrafts.model.EnrolledCourse;
 
-import com.artsandcrafts.request.StudentReq;
-
-@Entity
-public class Student {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int studentId;
+public class StudentReq {
+	
 	private String firstName;
 	private String lastName;
 	private String gender;
@@ -34,35 +21,13 @@ public class Student {
 	private String state;
 	private String pincode;
 	private String nationality;
-		
-	public Student() {
-		super();
-	}
-
-	public Student(StudentReq studentReq) {
-		this.firstName = studentReq.getFirstName();
-		this.lastName = studentReq.getLastName();
-		this.gender = studentReq.getGender();
-		this.fatherName = studentReq.getFatherName();
-		this.motherName = studentReq.getMotherName();
-		this.emailId = studentReq.getEmailId();
-		this.age = studentReq.getAge();
-		this.phoneNumber = studentReq.getPhoneNumber();
-		this.alternativeNumber = studentReq.getAlternativeNumber();
-		this.houseNo = studentReq.getHouseNo();
-		this.streetName = studentReq.getStreetName();
-		this.areaName = studentReq.getAreaName();
-		this.state = studentReq.getState();
-		this.pincode = studentReq.getPincode();
-		this.nationality = studentReq.getNationality();
-	}
 	
-	public int getStudentId() {
-		return studentId;
-	}
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
-	}
+	private String academyName;
+	private String enrolledCourse;
+	private String joinedDate;
+	private String endDate;
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -153,5 +118,30 @@ public class Student {
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}
+	public String getAcademyName() {
+		return academyName;
+	}
+	public void setAcademyName(String academyName) {
+		this.academyName = academyName;
+	}
+	public String getEnrolledCourse() {
+		return enrolledCourse;
+	}
+	public void setEnrolledCourse(String enrolledCourse) {
+		this.enrolledCourse = enrolledCourse;
+	}
+	public String getJoinedDate() {
+		return joinedDate;
+	}
+	public void setJoinedDate(String joinedDate) {
+		this.joinedDate = joinedDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
 	
 }
