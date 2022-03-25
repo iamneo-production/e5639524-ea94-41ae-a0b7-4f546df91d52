@@ -1,7 +1,5 @@
 package com.artsandcrafts.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +18,18 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<User> isUserPresent(String email, String password) {
-		return userRepo.findByEmailAndPassword(email, password);
+	public User isUserPresent(String username, String password) {
+		return userRepo.findByUsernameAndPassword(username, password);
+	}
+
+	@Override
+	public Boolean existsByEmailId(String emailId) {
+		return userRepo.existsByEmail(emailId);
+	}
+
+	@Override
+	public Boolean existsByUsername(String username) {
+		return userRepo.existsByUsername(username);
 	}
 
 }
