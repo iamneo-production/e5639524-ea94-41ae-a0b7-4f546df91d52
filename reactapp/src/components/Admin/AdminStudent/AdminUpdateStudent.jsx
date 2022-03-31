@@ -2,41 +2,39 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import UserService from "../../../service/UserService";
-import PersonalInfoImg from "../../../icon/personalInfo.png"
-import LocationlInfoImg from "../../../icon/locationImg.png"
-import CourselInfoImg from "../../../icon/courseImg.png"
+import PersonalInfoImg from "../../../icon/personalInfo.png";
+import LocationlInfoImg from "../../../icon/locationImg.png";
+import CourselInfoImg from "../../../icon/courseImg.png";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AdminUpdateStudent() {
-
-  let {studentId} = useParams();
+  let { studentId } = useParams();
   let navigation = useNavigate();
   const [initialValues, setInitialValues] = useState([]);
-  
+
   const loadDataOnlyOnce = () => {
-    UserService.FindStudentById(studentId).then((res) => {
+    UserService.FindByStudentById(studentId).then((res) => {
+      console.log(res.data)
       const updateUser = {
-        firstName: res.data[0].firstName,
-        lastName: res.data[0].lastName,
-        gender: res.data[0].gender,
-        fatherName: res.data[0].fatherName,
-        motherName: res.data[0].motherName,
-        phoneNumber: res.data[0].phoneNumber,
-        alternativeNumber: res.data[0].alternativeNumber,
-        emailId: res.data[0].emailId,
-        age: res.data[0].age,
-        houseNo: res.data[0].houseNo,
-        streetName: res.data[0].streetName,
-        areaName: res.data[0].areaName,
-        nationality: res.data[0].nationality,
-        state: res.data[0].state,
-        pincode: res.data[0].pincode,
-        academyName: res.data[0].academyName,
-        enrolledCourse: res.data[0].enrolledCourse,
-        joinedDate: res.data[0].joinedDate,
-        endDate: res.data[0].endDate
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        gender: res.data.gender,
+        fatherName: res.data.fatherName,
+        motherName: res.data.motherName,
+        phoneNumber: res.data.phoneNumber,
+        alternativeNumber: res.data.alternativeNumber,
+        emailId: res.data.emailId,
+        age: res.data.age,
+        houseNo: res.data.houseNo,
+        streetName: res.data.streetName,
+        areaName: res.data.areaName,
+        nationality: res.data.nationality,
+        state: res.data.state,
+        pincode: res.data.pincode,
       };
-      console.log(updateUser)
+      console.log(updateUser);
       setInitialValues(updateUser);
     });
   };
@@ -52,11 +50,10 @@ export default function AdminUpdateStudent() {
         .max(15, "Must be between 2 to 15 Character")
         .required("First Name Required"),
       lastName: Yup.string()
-        .min(3, "Must be between 2 to 15 Character")
-        .max(15, "Must be between 2 to 15 Character")
+        .min(1, "Must be between 1 to 15 Character")
+        .max(15, "Must be between 1 to 15 Character")
         .required("Last Name is Required"),
-      gender: Yup.string()
-        .required("Gender is required"),
+      gender: Yup.string().required("Gender is required"),
       fatherName: Yup.string()
         .min(3, "Must be between 2 to 15 Characte")
         .max(20, "Must be between 2 to 15 Character")
@@ -73,10 +70,12 @@ export default function AdminUpdateStudent() {
         .min(10, "Enter a valid Phone number")
         .max(10, "Enter a valid Phone number")
         .required("Alternative phone number is required"),
-      emailId: Yup.string().email("Invalid Email Id").required("Email Required"),
+      emailId: Yup.string()
+        .email("Invalid Email Id")
+        .required("Email Required"),
       age: Yup.string().max(2, "Enter a valid Age").required("Age Required"),
       houseNo: Yup.string()
-        .min(3, "Minimum 3 Character required" )
+        .min(3, "Minimum 3 Character required")
         .max(15, "Must be less than 15 Character")
         .required("House No. is required"),
       streetName: Yup.string()
@@ -97,31 +96,31 @@ export default function AdminUpdateStudent() {
         .required("State Required"),
       pincode: Yup.string()
         .min(4, "Enter a Valid Pincode")
-        .matches(/[0-9]{6}/, "Pincode contains only number" )
+        .matches(/[0-9]{6}/, "Pincode contains only number")
         .required("Pincode Required"),
     }),
     onSubmit: (values) => {
       console.log(formik.values);
       UserService.UpdateStudent(studentId, values).then((res) => {
-        alert("Updated successfully")
+        toast.success("Updated successfully");
         navigation(-1);
       });
     },
   });
 
   return (
-    <div className="container">
+    <div className="addDetails">
       <form onSubmit={formik.handleSubmit}>
         <div className="personalInfo">
           <div className="personalInfo-left">
             <h1 className="title">Personal Information</h1>
             <img className="personalInfoImg" src={PersonalInfoImg} alt="" />
           </div>
-          <div className="personalInfoContainer">
+          <div className="personalDetails">
             <div>
               <label htmlFor="firstName">First Name </label>
               <input
-                id="editfirstName"
+                id="firstName"
                 type="text"
                 name="firstName"
                 placeholder="Enter your first name"
@@ -137,7 +136,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="lastName">Last Name </label>
               <input
-                id="editlastName"
+                id="lastName"
                 type="text"
                 name="lastName"
                 placeholder="Enter your last name"
@@ -152,11 +151,12 @@ export default function AdminUpdateStudent() {
             <div className="genderDiv">
               <label htmlFor="gender">Gender </label>
               <select
-                id="editGender"
+                id="gender"
                 name="gender"
                 value={formik.values.gender || ""}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}> 
+                onBlur={formik.handleBlur}
+              >
                 <option value="" label="Gender" />
                 <option value="Male" label="Male" />
                 <option value="Female" label="Female" />
@@ -169,7 +169,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="fatherName">Father Name </label>
               <input
-                id="editfatherName"
+                id="fatherName"
                 type="text"
                 name="fatherName"
                 placeholder="Enter your father name"
@@ -185,7 +185,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="motherName">Mother Name </label>
               <input
-                id="editmotherName"
+                id="motherName"
                 type="text"
                 name="motherName"
                 placeholder="Enter your mother name"
@@ -201,7 +201,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="phoneNumber">Phone no </label>
               <input
-                id="editphoneNumber1"
+                id="phoneNumber"
                 type="text"
                 pattern="\d*"
                 name="phoneNumber"
@@ -218,7 +218,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="alternativeNumber">Alternate Phone No </label>
               <input
-                id="editphoneNumber2"
+                id="alternativeNumber"
                 type="text"
                 pattern="\d*"
                 name="alternativeNumber"
@@ -236,7 +236,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="emailId">Email Id </label>
               <input
-                id="editEmailId"
+                id="emailId"
                 type="email"
                 name="emailId"
                 placeholder="Enter your Email Id"
@@ -252,7 +252,7 @@ export default function AdminUpdateStudent() {
             <div>
               <label htmlFor="age">Age </label>
               <input
-                id="edirAge"
+                id="age"
                 type="text"
                 pattern="\d*"
                 name="age"
@@ -267,161 +267,112 @@ export default function AdminUpdateStudent() {
             </div>
           </div>
         </div>
-        
+
         <div className="addressInfo">
           <div className="addressInfo-left">
             <h1 className="title">Address Information</h1>
             <img className="addressInfoImg" src={LocationlInfoImg} alt="" />
           </div>
-          <div className="addressInfoContainer">
-          <div>
-            <label htmlFor="houseNo">House no </label>
-            <input
-              id="editHouseNo"
-              type="text"
-              name="houseNo"
-              placeholder="Enter house no"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.houseNo || ""}
-            />
-            {formik.touched.houseNo && formik.errors.houseNo ? (
-              <p id="error">{formik.errors.houseNo}</p>
-            ) : null}
-          </div>
+          <div className="addressDetails">
+            <div>
+              <label htmlFor="houseNo">House no </label>
+              <input
+                id="houseNo"
+                type="text"
+                name="houseNo"
+                placeholder="Enter house no"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.houseNo || ""}
+              />
+              {formik.touched.houseNo && formik.errors.houseNo ? (
+                <p id="error">{formik.errors.houseNo}</p>
+              ) : null}
+            </div>
 
-          <div>
-            <label htmlFor="streetName">Street Name </label>
-            <input
-              id="editStreetName"
-              type="text"
-              name="streetName"
-              placeholder="Enter street name"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.streetName || ""}
-            />
-            {formik.touched.streetName && formik.errors.streetName ? (
-              <p id="error">{formik.errors.streetName}</p>
-            ) : null}
-          </div>
+            <div>
+              <label htmlFor="streetName">Street Name </label>
+              <input
+                id="streetName"
+                type="text"
+                name="streetName"
+                placeholder="Enter street name"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.streetName || ""}
+              />
+              {formik.touched.streetName && formik.errors.streetName ? (
+                <p id="error">{formik.errors.streetName}</p>
+              ) : null}
+            </div>
 
-          <div>
-            <label htmlFor="areaName">Area Name </label>
-            <input
-              id="editAreaName"
-              type="text"
-              name="areaName"
-              placeholder="Enter area name"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.areaName || ""}
-            />
-            {formik.touched.areaName && formik.errors.areaName ? (
-              <p id="error">{formik.errors.areaName}</p>
-            ) : null}
-          </div>
+            <div>
+              <label htmlFor="areaName">Area Name </label>
+              <input
+                id="areaName"
+                type="text"
+                name="areaName"
+                placeholder="Enter area name"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.areaName || ""}
+              />
+              {formik.touched.areaName && formik.errors.areaName ? (
+                <p id="error">{formik.errors.areaName}</p>
+              ) : null}
+            </div>
 
-          <div>
-            <label htmlFor="nationality">Nationality </label>
-            <input
-              id="editNationality"
-              type="text"
-              name="nationality"
-              placeholder="Enter your nationality"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.nationality || ""}
-            />
-            {formik.touched.nationality && formik.errors.nationality ? (
-              <p id="error">{formik.errors.nationality}</p>
-            ) : null}
-          </div>
+            <div>
+              <label htmlFor="nationality">Nationality </label>
+              <input
+                id="nationality"
+                type="text"
+                name="nationality"
+                placeholder="Enter your nationality"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.nationality || ""}
+              />
+              {formik.touched.nationality && formik.errors.nationality ? (
+                <p id="error">{formik.errors.nationality}</p>
+              ) : null}
+            </div>
 
-          <div>
-            <label htmlFor="state">State </label>
-            <input
-              id="editState"
-              type="text"
-              name="state"
-              placeholder="Enter state"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.state || ""}
-            />
-            {formik.touched.state && formik.errors.state ? (
-              <p id="error">{formik.errors.state}</p>
-            ) : null}
-          </div>
+            <div>
+              <label htmlFor="state">State </label>
+              <input
+                id="state"
+                type="text"
+                name="state"
+                placeholder="Enter state"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.state || ""}
+              />
+              {formik.touched.state && formik.errors.state ? (
+                <p id="error">{formik.errors.state}</p>
+              ) : null}
+            </div>
 
-          <div>
-            <label htmlFor="pincode">Pincode </label>
-            <input
-              id="editPincode"
-              type="text"
-              pattern="\d*"
-              name="pincode"
-              placeholder="Enter your pincode"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.pincode || ""}
-            />
-            {formik.touched.pincode && formik.errors.pincode ? (
-              <p id="error">{formik.errors.pincode}</p>
-            ) : null}
-          </div>
+            <div>
+              <label htmlFor="pincode">Pincode </label>
+              <input
+                id="pincode"
+                type="text"
+                pattern="\d*"
+                name="pincode"
+                placeholder="Enter your pincode"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.pincode || ""}
+              />
+              {formik.touched.pincode && formik.errors.pincode ? (
+                <p id="error">{formik.errors.pincode}</p>
+              ) : null}
+            </div>
           </div>
         </div>
-        <div className="courseInfo">
-          <div className="courseInfo-left">
-            <h1 className="title">course Information</h1>
-            <img className="courseInfoImg" src={CourselInfoImg} alt="" />
-          </div>
-          <div className="courseInfoContainer">
-            <div>
-              <label htmlFor="academyName">Enrolling Course Name</label>
-              <input
-                id="editAcademyName"
-                type="text"
-                name="academyName"
-                disabled={true}
-                value={formik.values.academyName || ""}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="enrolledCourse">Enrolling Course Name</label>
-              <input
-                id="editEnrolledCourse"
-                type="text"
-                name="enrolledCourse"
-                disabled={true}
-                value={formik.values.enrolledCourse || ""}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="joinedDate">Joining Date </label>
-              <input
-                id="editJoinedDate"
-                name="joinedDate"
-                disabled={true}
-                defaultValue={formik.values.joinedDate || ""}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="endDate">End Date </label>
-              <input
-                id="editEndDate"
-                name="endDate"
-                disabled={true}
-                defaultValue={formik.values.endDate || ""}
-              />
-            </div>
-
-            </div>
-          </div>
+        
         <button id="updateStudent" type="submit">
           Update Student
         </button>
