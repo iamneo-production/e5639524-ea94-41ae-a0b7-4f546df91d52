@@ -30,12 +30,7 @@ export default function AddAcademy() {
       academyMobileNo: Yup.string()
         .matches(/^(\+\d{1,3}[- ]?)?\d{10}$/, "Contact number is not valid *")
         .required(" Please enter your Academy Contact number *"),
-      academyImageUrl: Yup.string()
-        .matches(
-          /^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/,
-          "Please Enter correct Url"
-        )
-        .required("Please enter your ImageUrl *"),
+      academyImageUrl: Yup.string().required("Please enter your ImageUrl *"),
       academyLocation: Yup.string()
         .required("Enter your Academy Location *")
         .min(3, "At least 3 characters required")
@@ -54,6 +49,9 @@ export default function AddAcademy() {
       });
     },
   });
+  const cancel = () => {
+    navigation("/admin/adminAcademy");
+  }
   return (
     <div>
       <h2 className="headingAddCourse">Add Academy</h2>
@@ -94,7 +92,7 @@ export default function AddAcademy() {
 
           <div>
             <label htmlFor="imageUrl">Image Url </label>
-            <input
+            <select
               id="imageUrl"
               type="url"
               name="academyImageUrl"
@@ -102,7 +100,18 @@ export default function AddAcademy() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               values={formik.values.academyImageUrl || ""}
-            />
+            > <option value="" label="Select Image" />
+              <option value="\images\1.jpg" label="Image 1" />
+              <option value="\images\2.jpg" label="Image 2" />
+              <option value="\images\3.jpg" label="Image 3" />
+              <option value="\images\4.jpg" label="Image 4" />
+              <option value="\images\5.jpg" label="Image 5" />
+              <option value="\images\6.jpg" label="Image 6" />
+              <option value="\images\7.jpg" label="Image 7" />
+              <option value="\images\8.jpg" label="Image 8" />
+              <option value="\images\9.jpg" label="Image 9" />
+              <option value="\images\10.jpg" label="Image 10" /> 
+            </select>
             {formik.touched.academyImageUrl && formik.errors.academyImageUrl ? (
               <p id="error">{formik.errors.academyImageUrl}</p>
             ) : null}
@@ -156,7 +165,9 @@ export default function AddAcademy() {
               <p id="error">{formik.errors.academyDescription}</p>
             ) : null}
           </div>
-          <div></div>
+          <div><button id="cancel" onClick={() => cancel()}>
+            Cancel
+          </button></div>
           <button id="addAcademy" type="submit">
             Add Academy
           </button>

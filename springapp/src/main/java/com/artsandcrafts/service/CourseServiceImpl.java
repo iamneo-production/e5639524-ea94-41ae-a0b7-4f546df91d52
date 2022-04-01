@@ -1,26 +1,34 @@
 package com.artsandcrafts.service;
 
-import com.artsandcrafts.model.Course;
-import com.artsandcrafts.dao.CourseRepo;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.util.Optional;
-
 import java.util.List;
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.artsandcrafts.dao.AcademyRepo;
+import com.artsandcrafts.dao.CourseRepo;
+import com.artsandcrafts.dao.EnrolledCourseRepo;
+import com.artsandcrafts.model.Academy;
+import com.artsandcrafts.model.Course;
+import com.artsandcrafts.model.EnrolledCourse;
 
 @Service
 public class CourseServiceImpl implements CourseService {
-    @Autowired
-    CourseRepo courseRepo;
-
-    @Override
-	public Course saveAddCourse(Course course) {
+	@Autowired
+	CourseRepo courseRepo;
+	@Autowired
+	AcademyRepo academyRepo;
+	@Autowired
+	EnrolledCourseRepo enrolledCourseRepo;
+	
+	@Override
+	public Course addNewCourse(Course course) {
+		Academy academy = academyRepo.findByAcademyName(course.getAcademy().getAcademyName());
+		course.setAcademy(academy);
 		return courseRepo.save(course);
 	}
 
-    public List<Course> getAll(){
-        List<Course> list =  courseRepo.findAll();
-        System.out.println("List = "+list);
-        return list;
-    }
+    
+
 }

@@ -1,113 +1,100 @@
-import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import React from "react";
 import * as Yup from "yup";
+import { useFormik } from "formik";
 import UserService from "../../../service/UserService";
 import PersonalInfoImg from "../../../icon/personalInfo.png";
 import LocationlInfoImg from "../../../icon/locationImg.png";
-import CourselInfoImg from "../../../icon/courseImg.png";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-export default function AdminUpdateStudent() {
-  let { studentId } = useParams();
-  let navigation = useNavigate();
-  const [initialValues, setInitialValues] = useState([]);
-
-  const loadDataOnlyOnce = () => {
-    UserService.FindByStudentById(studentId).then((res) => {
-      console.log(res.data)
-      const updateUser = {
-        firstName: res.data.firstName,
-        lastName: res.data.lastName,
-        gender: res.data.gender,
-        fatherName: res.data.fatherName,
-        motherName: res.data.motherName,
-        phoneNumber: res.data.phoneNumber,
-        alternativeNumber: res.data.alternativeNumber,
-        emailId: res.data.emailId,
-        age: res.data.age,
-        houseNo: res.data.houseNo,
-        streetName: res.data.streetName,
-        areaName: res.data.areaName,
-        nationality: res.data.nationality,
-        state: res.data.state,
-        pincode: res.data.pincode,
-      };
-      console.log(updateUser);
-      setInitialValues(updateUser);
+export default function StudentDetails() {
+    let navigation = useNavigate();
+    let users = localStorage.getItem("userInformation");
+    let userEmail = users.slice(1, -1);
+    const formik = useFormik({
+      initialValues: {
+        firstName: "",
+        lastName: "",
+        gender: "",
+        fatherName: "",
+        motherName: "",
+        phoneNumber: "",
+        alternativeNumber: "",
+        emailId: "",
+        age: "",
+        houseNo: "",
+        streetName: "",
+        areaName: "",
+        nationality: "",
+        state: "",
+        pincode: ""
+      },
+      validationSchema: Yup.object({
+        firstName: Yup.string()
+          .min(3, "Must be between 2 to 15 Character")
+          .max(15, "Must be between 2 to 15 Character")
+          .required("First Name Required"),
+        lastName: Yup.string()
+          .min(1, "Must be between 1 to 15 Character")
+          .max(15, "Must be between 1 to 15 Character")
+          .required("Last Name is Required"),
+        gender: Yup.string().required("Gender is required"),
+        fatherName: Yup.string()
+          .min(3, "Must be between 2 to 15 Characte")
+          .max(20, "Must be between 2 to 15 Character")
+          .required("Father Name is Required"),
+        motherName: Yup.string()
+          .min(3, "Must be between 2 to 15 Characte")
+          .max(20, "Must be between 2 to 15 Character")
+          .required("Mother name is required"),
+        phoneNumber: Yup.string()
+          .min(10, "Enter a valid Phone number")
+          .max(10, "Enter a valid Phone number")
+          .required("Phone number is required"),
+        alternativeNumber: Yup.string()
+          .min(10, "Enter a valid Phone number")
+          .max(10, "Enter a valid Phone number")
+          .required("Alternative phone number is required"),
+        emailId: Yup.string()
+          .email("Invalid Email Id")
+          .required("Email Required"),
+        age: Yup.string().max(2, "Enter a valid Age").required("Age Required"),
+        houseNo: Yup.string()
+          .min(3, "Minimum 3 Character required")
+          .max(15, "Must be less than 15 Character")
+          .required("House No. is required"),
+        streetName: Yup.string()
+          .min(3, "Enter a Valid Street Name")
+          .max(20, "Must be less than 20 Character")
+          .required("Street Name Required"),
+        areaName: Yup.string()
+          .min(3, "Enter a Valid Area Name")
+          .max(20, "Must be less than 20 Character")
+          .required("Area Name Required"),
+        nationality: Yup.string()
+          .min(3, "Enter a valid Nationality")
+          .max(20, "Must be less than 20 Character")
+          .required("Nationality Required"),
+        state: Yup.string()
+          .min(3, "Enter a Valid State")
+          .max(20, "Must be less than 20 Character")
+          .required("State Required"),
+        pincode: Yup.string()
+          .min(4, "Enter a Valid Pincode")
+          .matches(/[0-9]{6}/, "Pincode contains only number")
+          .required("Pincode Required")
+      }),
+      onSubmit: (values) => {
+        console.log(formik.values);
+        UserService.AddStudent(values).then((res) => {
+          toast.success("Your Details added Successfully !");
+          formik.resetForm();
+          toast.success("Now you can start enrolling course");
+          navigation(-1);
+        });
+      },
     });
-  };
-  useEffect(() => {
-    loadDataOnlyOnce();
-  }, []);
-  const formik = useFormik({
-    initialValues: initialValues,
-    enableReinitialize: true,
-    validationSchema: Yup.object({
-      firstName: Yup.string()
-        .min(3, "Must be between 2 to 15 Character")
-        .max(15, "Must be between 2 to 15 Character")
-        .required("First Name Required"),
-      lastName: Yup.string()
-        .min(1, "Must be between 1 to 15 Character")
-        .max(15, "Must be between 1 to 15 Character")
-        .required("Last Name is Required"),
-      gender: Yup.string().required("Gender is required"),
-      fatherName: Yup.string()
-        .min(3, "Must be between 2 to 15 Characte")
-        .max(20, "Must be between 2 to 15 Character")
-        .required("Father Name is Required"),
-      motherName: Yup.string()
-        .min(3, "Must be between 2 to 15 Characte")
-        .max(20, "Must be between 2 to 15 Character")
-        .required("Mother name is required"),
-      phoneNumber: Yup.string()
-        .min(10, "Enter a valid Phone number")
-        .max(10, "Enter a valid Phone number")
-        .required("Phone number is required"),
-      alternativeNumber: Yup.string()
-        .min(10, "Enter a valid Phone number")
-        .max(10, "Enter a valid Phone number")
-        .required("Alternative phone number is required"),
-      emailId: Yup.string()
-        .email("Invalid Email Id")
-        .required("Email Required"),
-      age: Yup.string().max(2, "Enter a valid Age").required("Age Required"),
-      houseNo: Yup.string()
-        .min(3, "Minimum 3 Character required")
-        .max(15, "Must be less than 15 Character")
-        .required("House No. is required"),
-      streetName: Yup.string()
-        .min(3, "Enter a Valid Street Name")
-        .max(20, "Must be less than 20 Character")
-        .required("Street Name Required"),
-      areaName: Yup.string()
-        .min(3, "Enter a Valid Area Name")
-        .max(20, "Must be less than 20 Character")
-        .required("Area Name Required"),
-      nationality: Yup.string()
-        .min(3, "Enter a valid Nationality")
-        .max(20, "Must be less than 20 Character")
-        .required("Nationality Required"),
-      state: Yup.string()
-        .min(3, "Enter a Valid State")
-        .max(20, "Must be less than 20 Character")
-        .required("State Required"),
-      pincode: Yup.string()
-        .min(4, "Enter a Valid Pincode")
-        .matches(/[0-9]{6}/, "Pincode contains only number")
-        .required("Pincode Required"),
-    }),
-    onSubmit: (values) => {
-      console.log(formik.values);
-      UserService.UpdateStudent(studentId, values).then((res) => {
-        toast.success("Updated successfully");
-        navigation(-1);
-      });
-    },
-  });
-
+  
   return (
     <div className="addDetails">
       <form onSubmit={formik.handleSubmit}>
@@ -126,7 +113,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter your first name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.firstName || ""}
+                value={formik.values.firstName}
               />
               {formik.touched.firstName && formik.errors.firstName ? (
                 <p id="error">{formik.errors.firstName}</p>
@@ -142,7 +129,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter your last name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.lastName || ""}
+                value={formik.values.lastName}
               />
               {formik.touched.lastName && formik.errors.lastName ? (
                 <p id="error">{formik.errors.lastName}</p>
@@ -153,7 +140,7 @@ export default function AdminUpdateStudent() {
               <select
                 id="gender"
                 name="gender"
-                value={formik.values.gender || ""}
+                value={formik.values.gender}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               >
@@ -175,7 +162,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter your father name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.fatherName || ""}
+                value={formik.values.fatherName}
               />
               {formik.touched.fatherName && formik.errors.fatherName ? (
                 <p id="error">{formik.errors.fatherName}</p>
@@ -191,7 +178,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter your mother name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.motherName || ""}
+                value={formik.values.motherName}
               />
               {formik.touched.motherName && formik.errors.motherName ? (
                 <p id="error">{formik.errors.motherName}</p>
@@ -208,7 +195,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter phone number"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.phoneNumber || ""}
+                value={formik.values.phoneNumber}
               />
               {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
                 <p id="error">{formik.errors.phoneNumber}</p>
@@ -225,7 +212,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter alternate number"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.alternativeNumber || ""}
+                value={formik.values.alternativeNumber}
               />
               {formik.touched.alternativeNumber &&
               formik.errors.alternativeNumber ? (
@@ -237,12 +224,9 @@ export default function AdminUpdateStudent() {
               <label htmlFor="emailId">Email Id </label>
               <input
                 id="emailId"
-                type="email"
+                disabled={true}
                 name="emailId"
-                placeholder="Enter your Email Id"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.emailId || ""}
+                defaultValue={userEmail}
               />
               {formik.touched.emailId && formik.errors.emailId ? (
                 <p id="error">{formik.errors.emailId}</p>
@@ -259,7 +243,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter your age"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.age || ""}
+                value={formik.values.age}
               />
               {formik.touched.age && formik.errors.age ? (
                 <p id="error">{formik.errors.age}</p>
@@ -283,7 +267,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter house no"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.houseNo || ""}
+                value={formik.values.houseNo}
               />
               {formik.touched.houseNo && formik.errors.houseNo ? (
                 <p id="error">{formik.errors.houseNo}</p>
@@ -299,7 +283,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter street name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.streetName || ""}
+                value={formik.values.streetName}
               />
               {formik.touched.streetName && formik.errors.streetName ? (
                 <p id="error">{formik.errors.streetName}</p>
@@ -315,7 +299,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter area name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.areaName || ""}
+                value={formik.values.areaName}
               />
               {formik.touched.areaName && formik.errors.areaName ? (
                 <p id="error">{formik.errors.areaName}</p>
@@ -331,7 +315,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter your nationality"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.nationality || ""}
+                value={formik.values.nationality}
               />
               {formik.touched.nationality && formik.errors.nationality ? (
                 <p id="error">{formik.errors.nationality}</p>
@@ -347,7 +331,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter state"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.state || ""}
+                value={formik.values.state}
               />
               {formik.touched.state && formik.errors.state ? (
                 <p id="error">{formik.errors.state}</p>
@@ -364,7 +348,7 @@ export default function AdminUpdateStudent() {
                 placeholder="Enter your pincode"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.pincode || ""}
+                value={formik.values.pincode}
               />
               {formik.touched.pincode && formik.errors.pincode ? (
                 <p id="error">{formik.errors.pincode}</p>
@@ -372,11 +356,10 @@ export default function AdminUpdateStudent() {
             </div>
           </div>
         </div>
-        
-        <button id="updateStudent" type="submit">
-          Update Student
+        <button id="addStudent" type="submit">
+          Add Student
         </button>
       </form>
     </div>
   );
-}
+};

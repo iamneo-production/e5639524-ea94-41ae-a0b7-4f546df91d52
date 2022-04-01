@@ -99,7 +99,8 @@ export default function Signup() {
                             <input
                             id="mobileNumber"
                             name="mobileNumber"
-                            type="number"
+                            type="text"
+                            pattern="\d*"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.mobileNumber} />
