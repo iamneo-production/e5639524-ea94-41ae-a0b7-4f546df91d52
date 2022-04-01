@@ -28,17 +28,13 @@ public class CourseController {
     public Course addCourse(@RequestBody Course course) {
         return courseService.addNewCourse(course);
     }
-
-
-
-    @GetMapping("/list") //url
-    public List<Course> list(){
-        return courseService.getAll();
+    
+    @DeleteMapping("/deleteCourse/{id}")
+    public String deleteCourse(@PathVariable int id) {
+        return courseService.deleteCourse(id);
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
+
+   
 }
 

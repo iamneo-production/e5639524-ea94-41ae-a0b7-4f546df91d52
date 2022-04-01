@@ -9,4 +9,6 @@ public interface CourseService {
     public Course addNewCourse(Course course);
 
     public List<Course> getAll();
+
+    public String deleteCourse(int id);
 }
