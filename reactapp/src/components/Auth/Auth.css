@@ -3,12 +3,15 @@
   padding: 0vh;
 }
 .signup {
-  padding: 4vh;
-  background-color: #352a9981;
+  padding-top: 5vh;
+  padding-right: 10vw;
+  padding-left: 2vw;
+  padding-bottom: 7vh;
+  background-image: url("/public/images/3.jpg");
 }
 .error {
   color: red;
-  margin-right: 2vh;
+  margin-right: vh;
   text-align: right;
 }
 .signup-heading {
@@ -26,18 +29,23 @@
 .login-right {
   width: 50vh;
   padding: 5vh;
-  padding-right: 5vh;
 }
-#email, #password, #username, #mobileNumber, #confirmPassword {
+#email,
+#password,
+#username,
+#mobileNumber,
+#confirmPassword {
   width: 45vh;
   margin: 2vh;
   height: 5vh;
 }
 .signup-img {
+  margin-top: 8vh;
   width: 70vh;
+  border-radius: 10vh;
 }
 .signup-left {
-  margin-top: 18vh;
+  margin-top: 6vh;
   text-align: center;
 }
 .signup-text {
@@ -66,7 +74,7 @@ label {
   font-size: 18px;
   font-weight: 600;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .signup-grid {
     width: 100%;
     display: flex;
@@ -74,7 +82,9 @@ label {
     flex-direction: column;
   }
   .signup-right {
-    text-align: center;
+    width: 90vw;
+    height: 90vh;
+    text-align: end;
   }
   .signup-heading {
     width: 120vw;
@@ -96,11 +106,13 @@ label {
 .login {
   height: 100vh;
   padding-top: 18vh;
-  background-color: #352a9981;
+  background-image: url("/public/images/3.jpg");
 }
 .login-img {
   width: 60vh;
+  height: 40vh;
   padding: 4vh;
+  border-radius: 10vh;
 }
 .login-heading {
   width: 160vh;
@@ -115,7 +127,10 @@ label {
 .login-h {
   margin-bottom: 5vh;
 }
-.welcome-login, .login-h, .welcome, .signup-h {
+.welcome-login,
+.login-h,
+.welcome,
+.signup-h {
   font-weight: 700;
   font-size: 32px;
   text-align: center;
