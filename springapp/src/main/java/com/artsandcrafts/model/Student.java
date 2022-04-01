@@ -1,8 +1,6 @@
 package com.artsandcrafts.model;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
-import com.artsandcrafts.request.StudentReq;
 
 @Entity
 public class Student {
@@ -34,29 +30,36 @@ public class Student {
 	private String state;
 	private String pincode;
 	private String nationality;
-		
-	public Student() {
-		super();
-	}
+	
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "studentId", referencedColumnName = "studentId")
+    private List<EnrolledCourse> enrolledCourses;
 
-	public Student(StudentReq studentReq) {
-		this.firstName = studentReq.getFirstName();
-		this.lastName = studentReq.getLastName();
-		this.gender = studentReq.getGender();
-		this.fatherName = studentReq.getFatherName();
-		this.motherName = studentReq.getMotherName();
-		this.emailId = studentReq.getEmailId();
-		this.age = studentReq.getAge();
-		this.phoneNumber = studentReq.getPhoneNumber();
-		this.alternativeNumber = studentReq.getAlternativeNumber();
-		this.houseNo = studentReq.getHouseNo();
-		this.streetName = studentReq.getStreetName();
-		this.areaName = studentReq.getAreaName();
-		this.state = studentReq.getState();
-		this.pincode = studentReq.getPincode();
-		this.nationality = studentReq.getNationality();
+	public Student() {
+		
 	}
 	
+	public Student(String firstName, String lastName, String gender, String fatherName, String motherName,
+			String emailId, String age, String phoneNumber, String alternativeNumber, String houseNo, String streetName,
+			String areaName, String state, String pincode, String nationality) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.fatherName = fatherName;
+		this.motherName = motherName;
+		this.emailId = emailId;
+		this.age = age;
+		this.phoneNumber = phoneNumber;
+		this.alternativeNumber = alternativeNumber;
+		this.houseNo = houseNo;
+		this.streetName = streetName;
+		this.areaName = areaName;
+		this.state = state;
+		this.pincode = pincode;
+		this.nationality = nationality;
+	}
+
 	public int getStudentId() {
 		return studentId;
 	}
@@ -152,6 +155,12 @@ public class Student {
 	}
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
+	}
+	public List<EnrolledCourse> getEnrolledCourses() {
+		return enrolledCourses;
+	}
+	public void setEnrolledCourses(List<EnrolledCourse> enrolledCourses) {
+		this.enrolledCourses = enrolledCourses;
 	}
 	
 }

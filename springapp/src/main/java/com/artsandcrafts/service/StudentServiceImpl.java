@@ -1,5 +1,7 @@
 package com.artsandcrafts.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,39 +12,23 @@ import com.artsandcrafts.dao.EnrolledCourseRepo;
 import com.artsandcrafts.dao.StudentRepo;
 import com.artsandcrafts.model.EnrolledCourse;
 import com.artsandcrafts.model.Student;
-import com.artsandcrafts.request.StudentReq;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 	@Autowired
 	StudentRepo studentRepo;
 	
-	@Autowired
-	EnrolledCourseRepo enrolledCourseRepo;
-	
 	@Override
-	public Student addStudent(StudentReq studentReq) {
-		
-		Student student = new Student(studentReq);
-		student = studentRepo.save(student);
-		
-		//EnrolledCourse courseReq = new EnrolledCourse(studentReq);
-		EnrolledCourse course = new EnrolledCourse();
-		course.setAcademyName(studentReq.getAcademyName());
-		course.setEnrolledCourse(studentReq.getEnrolledCourse());
-		course.setJoinedDate(studentReq.getJoinedDate());
-		course.setEndDate(studentReq.getEndDate());
-		course.setStudent(student);
-		enrolledCourseRepo.save(course);
-		
-		return student;
-		
+	public Student addStudent(Student student) {
+		return studentRepo.save(student);
 	}
-
+	
 	@Override
 	public Student editStudent(int studentId, Student student) {
 		
 		Student editStud = studentRepo.findById(studentId);
+		List<EnrolledCourse> course = new ArrayList<EnrolledCourse>();
+		course.addAll(editStud.getEnrolledCourses());
 
         if(Objects.nonNull(student.getAge())&&
                 !"".equalsIgnoreCase(student.getAge()))
@@ -109,6 +95,7 @@ public class StudentServiceImpl implements StudentService {
                 !"".equalsIgnoreCase(student.getStreetName()))
         {  editStud.setStreetName(student.getStreetName());
         }
+        editStud.setEnrolledCourses(course);
         return studentRepo.save(editStud);
 	}
 
@@ -118,8 +105,10 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> findByStudentId(int id) {
-		return studentRepo.findByStudentId(id);
+	public List<EnrolledCourse> findByStudentId(int id) {
+		Student student = studentRepo.findByStudentId(id);
+		List<EnrolledCourse> eCourse = student.getEnrolledCourses();
+		return eCourse;
 	}
 
 	@Override
@@ -136,6 +125,33 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Boolean existsByEmailId(String emailId) {
 		return studentRepo.existsByEmailId(emailId);
+	}
+
+	@Override
+	public Student enrolleCourse(String emailId, Student student) {
+		
+		Student editStud = studentRepo.findByEmailId(emailId);
+		List<EnrolledCourse> course = new ArrayList<EnrolledCourse>();
+		course.addAll(student.getEnrolledCourses());
+		course.addAll(editStud.getEnrolledCourses());
+		editStud.setEnrolledCourses(course);
+        return studentRepo.save(editStud);
+
+	}
+
+	@Override
+	public Integer getStudentId(String email) {
+		return studentRepo.getStudentId(email);
+	}
+
+	@Override
+	public Boolean checkAdmission(String emailId, int courseID) {
+		return studentRepo.existsByEmailIdAndEnrolledCourses_Course_CourseId(emailId, courseID);
+	}
+
+	@Override
+	public Student findByStudentIDs(int id) {
+		return studentRepo.findByStudentId(id);
 	}
 	
 }

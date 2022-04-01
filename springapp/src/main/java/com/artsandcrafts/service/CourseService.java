@@ -1,14 +1,23 @@
 package com.artsandcrafts.service;
 
-import com.artsandcrafts.model.Course;
-
 import java.util.List;
 
+import com.artsandcrafts.model.Course;
+
 public interface CourseService {
-    
-    public Course addNewCourse(Course course);
+	
+	public Course addNewCourse(Course course);
 
-    public List<Course> getAll();
+	public List<Course> findByCourseName(String courseName);
 
-    public String deleteCourse(int id);
+	public Course findByCourseId(int id);
+
+	public List<Course> getAllCourse();
+
+	public String deleteCourse(int id);
+
+	public Course editCourse(int courseId, Course editCourse);
+
+	public List<Course> viewCourseByAcademyId(int academyName);
+
 }

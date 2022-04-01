@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 export default function StudentDetails() {
     let navigation = useNavigate();
     let users = localStorage.getItem("userInformation");
-    let userEmail = JSON.parse(users);
+    let userEmail = users.slice(1, -1);
     const formik = useFormik({
       initialValues: {
         firstName: "",

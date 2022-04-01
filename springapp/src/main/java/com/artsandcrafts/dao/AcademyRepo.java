@@ -11,7 +11,9 @@ import com.artsandcrafts.model.Academy;
 @Repository
 public interface AcademyRepo extends JpaRepository<Academy, Integer> {
 	
-	List<Academy> findByAcademyName(String academyName);
-	
+	Academy findByAcademyName(String academyName);
+
 	Academy findByAcademyId(int academyId);
+
+	Boolean existsByAcademyName(String academyName);
 }

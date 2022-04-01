@@ -1,0 +1,9 @@
+#enrollCourse {
+   width: 15vh;
+   margin-left: 8vh;
+   background-color: green;
+   outline: none;
+   color: white;
+   border: none;
+   border-radius: 1vh;
+}

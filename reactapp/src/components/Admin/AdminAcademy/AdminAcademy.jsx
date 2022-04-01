@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import UserService from '../../../service/UserService';
-import { ButtonGroup, Card } from 'react-bootstrap';
-import Button from '@restart/ui/esm/Button';
-import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import UserService from "../../../service/UserService";
+import { ButtonGroup, Card } from "react-bootstrap";
+import Button from "@restart/ui/esm/Button";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { Rating } from "react-simple-star-rating";
+import { toast } from "react-toastify";
 
 export default function AcademyList() {
   let navigate = useNavigate();
@@ -12,6 +14,7 @@ export default function AcademyList() {
   const loadDataOnlyOnce = () => {
     UserService.viewAcademy().then((res) => {
       setAcademy(res.data);
+      console.log(res.data)
     });
   };
   useEffect(() => {
@@ -25,7 +28,7 @@ export default function AcademyList() {
       UserService.viewAcademy().then((res) => {
         setAcademy(res.data);
       });
-    }else {
+    } else {
       UserService.viewAcademyByName(search).then((res) => {
         setAcademy(res.data);
       });
@@ -36,62 +39,76 @@ export default function AcademyList() {
   };
   const deleteAcademy = (id) => {
     UserService.deleteAcademy(id).then((res) => {
-      setAcademy(academy.filter((academy)=> academy.academyId !== id))
+      setAcademy(academy.filter((academy) => academy.academyId !== id));
+      toast.success("Academy Deleted Successfully !!");
     });
   };
 
   return (
     <div>
       <div className="searchBar">
-            <input
-              className="search"
-              type="text"
-              placeholder="Type here to search Academy"
-              value={search}
-              onChange={changeSearchHandler}
-            />
-            <input
-              id="academySearch"
-              type="submit"
-              value="Search"
-              onClick={() => findAcademy()}
-            />
-            <span id="addAcademyBtn"><Link to="adminAddAcademy">Add Academy</Link></span>
+        <input
+          className="search"
+          type="text"
+          placeholder="Type here to search Academy"
+          value={search}
+          onChange={changeSearchHandler}
+        />
+        <input
+          id="academySearch"
+          type="submit"
+          value="Search"
+          onClick={() => findAcademy()}
+        />
+        <span id="addAcademyBtn">
+          <Link to="adminAddAcademy">Add Academy</Link>
+        </span>
       </div>
       <div className="academyGrid">
-      {
-        academy.map (academy =>
-          <React.Fragment key={academy.academyId}>
-          <Card  className="academyElement">
-            <Card.Img variant="top" src={academy.academyImageUrl}/>
-            <Card.Title className="academyCardTitle">{academy.academyName}</Card.Title>
-            <Card.Body className="academyCardGrid">
-            <Card.Title>Email : </Card.Title>
-              <Card.Text>
-                {academy.academyEmail}
-              </Card.Text>
-              <Card.Title>Contact No:</Card.Title>
-              <Card.Text>
-                {academy.academyMobileNo}
-              </Card.Text>
-              <Card.Title>Location:</Card.Title>
-              <Card.Text>
-                {academy.academyLocation}
-             </Card.Text> 
-             <Card.Title>Description:</Card.Title>
-             <Card.Text>
-                {academy.academyDescription}
-             </Card.Text>
-             <div></div>
-             <ButtonGroup className="cardButton">
-              <Button id="editAcademy" onClick={() => editAcademy(academy.academyId)} variant="primary">Edit</Button>
-              <Button id="deleteAcademy" onClick={() => deleteAcademy(academy.academyId)} variant="primary">Delete</Button>
-            </ButtonGroup>
-            </Card.Body>
-          </Card>
+        {academy.map((academy, i) => (
+          <React.Fragment key={i}>
+            <Card className="academyElement" key={i}>
+              <Card.Img variant="top" src={academy.academyImageUrl} />
+              <Card.Title className="academyCardTitle">
+                {academy.academyName}
+              </Card.Title>
+              <Card.Body className="academyCardGrid">
+                <Card.Title>Email : </Card.Title>
+                <Card.Text>{academy.academyEmail}</Card.Text>
+                <Card.Title>Contact No:</Card.Title>
+                <Card.Text>{academy.academyMobileNo}</Card.Text>
+                <Card.Title>Location:</Card.Title>
+                <Card.Text>{academy.academyLocation}</Card.Text>
+                <Card.Title>Description:</Card.Title>
+                <Card.Text>{academy.academyDescription}</Card.Text>
+                <Rating
+                  initialValue={academy.rating}
+                  fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}
+                  allowHalfIcon
+                  readonly={academy.rating > 0 || academy.rating === 0}
+                  allowHover={false}
+                />
+                <ButtonGroup className="cardButton">
+                  <Button
+                    id="editAcademy"
+                    onClick={() => editAcademy(academy.academyId)}
+                    variant="primary"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    id="deleteAcademy"
+                    onClick={() => deleteAcademy(academy.academyId)}
+                    variant="primary"
+                  >
+                    Delete
+                  </Button>
+                </ButtonGroup>
+              </Card.Body>
+            </Card>
           </React.Fragment>
-        )}
-        </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }

@@ -1,9 +1,8 @@
 package com.artsandcrafts.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
-
 import com.artsandcrafts.model.EnrolledCourse;
-import com.artsandcrafts.request.EnrolledCourseResponse;
-import com.artsandcrafts.request.StudentReq;
 import com.artsandcrafts.service.EnrolledCourseService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -29,18 +25,13 @@ public class EnrolledCourseController {
 	    return enrolledCourseService.addAdmission(course);
 	}
 	
-	@GetMapping("/viewAdmission")
-	public List<EnrolledCourse> viewAdmission() {
-		return enrolledCourseService.viewAdmission();
+	@GetMapping("/viewAdmission/{id}")
+	public EnrolledCourse viewAdmission(@PathVariable int id) {
+		return enrolledCourseService.viewAdmission(id);
 	}
 	
-	@GetMapping("/viewAdmissionTable")
-	public List<EnrolledCourseResponse> viewAdmissionTable() {
-		return enrolledCourseService.viewAdmissionTable();
-	}
-	
-	@GetMapping("/viewAdmissionByStudentId/{studentId}")
-	public List<EnrolledCourse> viewAdmissions(@PathVariable int studentId) {
-		return enrolledCourseService.viewAdmissions(studentId);
-	}
+	@DeleteMapping("/deleteAdmission/{id}")
+    public String deleteAdmission(@PathVariable int id) {
+        return enrolledCourseService.deleteAdmission(id);
+    }
 }

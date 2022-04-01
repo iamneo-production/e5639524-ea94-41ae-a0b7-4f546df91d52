@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Routing from './components/Routing/Routing'
 import reportWebVitals from './reportWebVitals';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Routing />
+    <ToastContainer/>
   </React.StrictMode>,
   document.getElementById('root')
 );

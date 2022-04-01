@@ -1,6 +1,6 @@
 .title {
   font-size: 2.5vh;
-  margin-left: .5vw;
+  margin-left: 0.5vw;
 }
 #adminAcademy {
   cursor: pointer;
@@ -8,11 +8,11 @@
 h1 {
   color: #362874;
 }
-#courseImg{
+#courseImg {
   width: 5vh;
   height: 4.5vh;
 }
-#studentImg  {
+#studentImg {
   width: 4vh;
   height: 4vh;
   margin-left: 5vh;
@@ -26,7 +26,7 @@ h1 {
 #adminCourse,
 #adminStudents,
 #userEnrolledCourse {
-  margin-left:1vh;
+  margin-left: 1vh;
   cursor: pointer;
 }
 #logout {
@@ -50,30 +50,66 @@ td {
   padding: 8px;
   text-align: center;
 }
-tr:nth-child(even) {
-  background-color: #36287425;
+tr {
+  background-color: #fff;
 }
-.searchBar {
+tr:nth-child(even) {
+  background-color: #dbd8e7a8;
+}
+.searchBar .search {
+  margin-left: 15vw;
+}
+.searchStud{
+  margin-left: 4vw;
+}
+.searchBar > input, .searchStud > input{
+  margin-top: 1vw;
+  height: 6vh;
+  margin-left: 1vw;
+}
+.searchBar, .searchStud {
+  margin-top: 4vh;
   margin-bottom: 4vh;
+  text-align: center;
+}
+.searchStudent {
+  margin-left: 5vw;
 }
 .search {
   margin-top: 1vw;
   margin-left: 36vw;
   border-width: 1px;
   width: 20vw;
-	height: 6vh;
+  height: 6vh;
 }
-#addStudentBtn a, #addAcademyBtn a, #addCourseBtn a  {
+#addStudentBtn a,
+#addAcademyBtn a,
+#addCourseBtn a {
   text-decoration: none;
-  padding: 10px;
-  padding-bottom: 15px;
-	float: right;
+  justify-content: center;
+  text-align: center;
+  padding-top: 1.5vh;
+  width: 18vh;
+  height: 6vh;
+  float: right;
   margin-right: 2vw;
-	background-color: #362874;
-	color:#FFF;
+  background-color: #362874;
+  color: #fff;
   border: none;
   border-radius: 1vh;
-	box-shadow: 1px 1px 10px #3628748a;
+  box-shadow: 1px 1px 10px #3628748a;
+}
+#cancel {
+  padding: 10px;
+  width: 6vw;
+  padding-bottom: 15px;
+  float: right;
+  margin-left: 2vw;
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 1vh;
+  box-shadow: 1px 1px 10px #3628748a;
 }
 #addStudent,
 #updateStudent {
@@ -92,9 +128,11 @@ tr:nth-child(even) {
   background-color: #362874;
   box-shadow: 1px 1px 1px #3628748a;
 }
-#studentSearch, #academySearch, #courseSearch{
+#studentSearch,
+#academySearch,
+#courseSearch {
   border: none;
-  width: 6vw;
+  width: 10vh;
   border-radius: 1vh;
   height: 6vh;
   color: white;
@@ -123,7 +161,8 @@ tr:nth-child(even) {
   color: red;
   font-size: small;
 }
-input, select {
+input,
+select {
   font-size: 16px;
   width: 20vw;
   height: 5vh;
@@ -134,7 +173,6 @@ input, select {
 .joinDate {
   display: grid;
   grid-template-columns: auto auto;
- 
 }
 .joinLable {
   float: right;
@@ -148,15 +186,22 @@ label {
   color: #362874;
   margin-right: 1vw;
 }
-.personalInfo, .personalDetails, .addressInfo, .addressDetails, .courseInfo, .courseInfoContainer {
+.personalInfo,
+.personalDetails,
+.addressInfo,
+.addressDetails,
+.courseInfo,
+.courseInfoContainer {
   display: grid;
   text-align: end;
-  grid-template-columns: auto auto
+  grid-template-columns: auto auto;
 }
-.personalDetails > div, .addressDetails > div {
+.personalDetails > div,
+.addressDetails > div {
   margin: 3vh;
 }
-.personalInfo, .addressInfo {
+.personalInfo,
+.addressInfo {
   width: 90vw;
   margin-left: 2vw;
   margin-top: 5vh;
@@ -164,7 +209,7 @@ label {
   padding: 5vh;
   border-radius: 10vh;
   box-shadow: 1px 1px 10px #3628748a;
-} 
+}
 .courseInfo {
   width: 90vw;
   margin-left: 2vw;
@@ -173,37 +218,27 @@ label {
   border-radius: 10vh;
   box-shadow: 1px 1px 10px #3628748a;
 }
-.personalInfoImg, .addressInfoImg{
+.personalInfoImg,
+.addressInfoImg {
   width: 15vw;
   height: 25vh;
   margin-top: 10vh;
   margin-left: 15px;
 }
-.courseInfoImg  {
+.courseInfoImg {
   width: 10vw;
   height: 20vh;
   margin-top: 1vh;
 }
-.personalInfo-left, .addressInfo-left, .courseInfo-left {
+.personalInfo-left,
+.addressInfo-left,
+.courseInfo-left {
   text-align: center;
 }
 .courseInfo > div {
   margin: 8vh;
 }
-.searchBar {
-  margin-top: 25px;
-  text-align: center;
-}
-.searchBar .search {
-  height: 6vh;
-  margin-left: 15vw;
-}
-.searchBar > input {
-  height: 35px;
-  margin-left: 1vw;
-}
-
-.MainDiv{
+.MainDiv {
   display: grid;
   grid-template-columns: auto auto;
   width: 80vw;
@@ -213,17 +248,20 @@ label {
   padding: 5vh;
   border-radius: 10vh;
   box-shadow: 1px 1px 10px #3628748a;
-} 
-label{
+}
+label {
   font-size: medium;
   font-weight: 450;
-}  
-.MainDiv div{
+}
+.MainDiv div {
   font-size: medium;
   text-align: end;
   padding: 3.25vh;
-}  
-#addCourse, #updateCourse, #updateAcademy, #addAcademy {
+}
+#addCourse,
+#updateCourse,
+#updateAcademy,
+#addAcademy {
   border: none;
   margin-top: 4vh;
   margin-left: 30vw;

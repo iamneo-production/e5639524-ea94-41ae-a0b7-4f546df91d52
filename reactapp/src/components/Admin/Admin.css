@@ -1,114 +1,129 @@
 .admin-nav {
-    padding: 1vh;
-    background-color: #362874;
-    text-align: center;
-    box-shadow: 1px 1px 15px #3628748a;
+  padding: 1vh;
+  background-color: #362874;
+  text-align: center;
+  box-shadow: 1px 1px 15px #3628748a;
 }
 .navbar-link {
-    margin-left: 24vw;
-    padding: 1vh;
-    text-align: center;
+  margin-left: 24vw;
+  padding: 1vh;
+  text-align: center;
 }
 .navbar-link a {
-    margin-left: .5vw;
-    margin-right: 2vw;
-    color: white;
-    text-decoration: none;
+  margin-left: 0.5vw;
+  margin-right: 2vw;
+  color: white;
+  text-decoration: none;
 }
 .navbar-link img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
-.navbar-link a:hover, .nav-logout a:hover {
-    transform: scale(1.1);
+.navbar-link a:hover,
+.navi-logout a:hover {
+  transform: scale(1.1);
 }
-.nav-logout {
-    margin-left: 27vw;
+.navi-logout {
+  margin-left: 25vw;
 }
-.nav-logout a {
-    margin-left: .5vw;
-    margin-right: 2vw;
-    color: white;
-    text-decoration: none;
+.navi-logout a {
+  margin-left: 0.5vw;
+  margin-right: 2vw;
+  color: white;
+  text-decoration: none;
 }
-.academyGrid, .courseGrid{
-    display: grid;
-    grid-template-columns: auto auto auto;
+.academyGrid,
+.courseGrid {
+  display: flex;
+  flex-wrap: wrap;
 }
-.courseElement{
-    width: 28rem;
-    height: 22rem;
-    margin: 2vw;
-    border-radius: 4vh;
-    box-shadow: 1px 1px 10px #3628748a;
+@media screen and (max-width: 800px) {
+  .academyGrid, .courseGrid {
+    flex-direction: column;
+  }
+}
+.courseElement {
+  width: 58vh;
+  height: 60vh;
+  margin: 2vw;
+  border-radius: 4vh;
+  box-shadow: 1px 1px 10px #3628748a;
 }
 .academyElement {
-    width: 28rem;
-    height: 33rem;
-    margin: 2vw;
-    border-radius: 4vh;
-    box-shadow: 1px 1px 10px #3628748a;
+  width: 58vh;
+  height: 70vh;
+  margin: 2vw;
+  border-radius: 4vh;
+  box-shadow: 1px 1px 10px #3628748a;
 }
-.academyElement:hover, .courseElement:hover {
-    transform: scale(1.05);
+.academyElement:hover,
+.courseElement:hover {
+  transform: scale(1.05);
 }
 .academyElement img {
-    width: auto;
-    height: 30vh;
-    padding: 1vh;
-    object-fit: cover;
-    border-radius: 4vh;
+  width: auto;
+  height: 30vh;
+  padding: 1vh;
+  object-fit: cover;
+  border-radius: 4vh;
 }
 .courseCardTitle {
-    text-align: center;
-    padding: 1vw;
+  text-align: center;
+  padding: 1vw;
 }
 .academyCardTitle {
-    padding-left: 1vh;
+  padding-left: 1vh;
 }
-.academyCardGrid, .courseCardGrid {
-    display: grid;
-    text-align: start;
-    grid-template-columns: 10vw auto;
+.courseCardGrid {
+  display: grid;
+  text-align: start;
+  grid-template-columns: 30vh auto;
 }
-.academyCardGrid div, .courseCardGrid div {
-    font-size: 1vw;
+.academyCardGrid {
+  display: grid;
+  text-align: start;
+  grid-template-columns: auto auto;
 }
-.academyCardGrid p, .courseCardGrid p{
-    margin-bottom: 0;
+.academyCardGrid div,
+.courseCardGrid div {
+  font-weight: 550;
+  font-size: 1rem;
+}
+.academyCardGrid p,
+.courseCardGrid p {
+  margin-bottom: 0;
 }
 .cardButton button {
-    width: 4vw;
-    height: 4vh;
+  width: 4vw;
+  height: 4vh;
 }
 #editAcademy:hover {
-    color: black;
-    background-color: #53478bc2;
+  color: black;
+  background-color: #53478bc2;
 }
-#editAcademy {
-    margin-left: 5vw;
-    width: 5vw;
-    height: 5vh;
-    color: white;
-    outline: none;
-    text-decoration: none;
-    border: none;
-    border-radius: 1vh;
-    background-color: #362874;
-    box-shadow: 1px 1px 10px #3628748a;
+#editAcademy , #editCourse{
+  width: 10vh;
+  height: 5vh;
+  color: white;
+  outline: none;
+  text-decoration: none;
+  border: none;
+  border-radius: 1vh;
+  background-color: #362874;
+  box-shadow: 1px 1px 10px #3628748a;
 }
 #deleteAcademy:hover {
-    color: white;
-    background-color: rgba(255, 72, 0, 0.774);
+  color: white;
+  background-color: rgba(255, 72, 0, 0.774);
 }
-#deleteAcademy {
-    margin-left: 1vw;
-    width: 5vw;
-    height: 5vh;
-    color: white;
-    outline: none;
-    text-decoration: none;
-    border: none;
-    border-radius: 1vh;
-    background-color: red;
-    box-shadow: 1px 1px 10px #3628748a;
+#deleteAcademy, #deleteCourse {
+  margin-left: 1vw;
+  width: 10vh;
+  height: 5vh;
+  color: white;
+  outline: none;
+  text-decoration: none;
+  border: none;
+  border-radius: 1vh;
+  background-color: red;
+  box-shadow: 1px 1px 10px #3628748a;
 }

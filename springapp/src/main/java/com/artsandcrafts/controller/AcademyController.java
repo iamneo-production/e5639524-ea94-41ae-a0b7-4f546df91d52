@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.artsandcrafts.model.Academy;
 import com.artsandcrafts.service.AcademyService;
@@ -34,7 +33,7 @@ public class AcademyController {
 	}
 	
 	@GetMapping("/findByAcademy/{academyName}")
-    public List<Academy> findByAcademyName(@PathVariable String academyName)
+    public Academy findByAcademyName(@PathVariable String academyName)
     {
         return academyService.findByAcademyName(academyName);
     }
@@ -48,12 +47,20 @@ public class AcademyController {
 	@PutMapping("/editAcademy/{academyId}")
 	private Academy editAcademy(@PathVariable int academyId ,@RequestBody Academy academy) {  
 		return academyService.editAcademy(academyId, academy);
-	 }
+	}
 	
 	@DeleteMapping("/deleteAcademy/{id}")
     public String deleteAcademy(@PathVariable int id)
     {
         return academyService.deleteAcademy(id);
+    }
+	@GetMapping("/checkAcademyName/{academyName}")
+	public String checkAcademy(@PathVariable String academyName) {
+		Boolean bool = academyService.existsByAcademyName(academyName);
+		if(bool)
+			return "true";
+		else 
+			return "false";  
     }
 	
 }

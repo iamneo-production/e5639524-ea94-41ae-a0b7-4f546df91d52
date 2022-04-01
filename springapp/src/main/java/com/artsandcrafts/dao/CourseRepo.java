@@ -11,4 +11,12 @@ import com.artsandcrafts.model.Course;
 @Repository
 public interface CourseRepo extends JpaRepository<Course, Integer> {
 
+	List<Course> findByCourseName(String courseName);
+	
+	Course findByCourseId(int courseId);
+	
+	List<Course> findByAcademyAcademyId(int academyId);
+	
+	List<Course> findByAcademy_AcademyId(int academyId);
+	
 }

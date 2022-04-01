@@ -28,13 +28,33 @@ public class CourseController {
     public Course addCourse(@RequestBody Course course) {
         return courseService.addNewCourse(course);
     }
-    
-    @DeleteMapping("/deleteCourse/{id}")
+	
+	@GetMapping("/findByCourse/{courseName}")
+    public List<Course> findByCourseName(@PathVariable String courseName) {
+        return courseService.findByCourseName(courseName);
+    }
+	
+	@GetMapping("/findCourse/{id}")
+    public Course findByCourseId(@PathVariable int id) {
+        return courseService.findByCourseId(id);
+    }
+	
+	@PutMapping("/editCourse/{courseId}")
+	public Course editCourse(@PathVariable int courseId, @RequestBody Course editCourse ) {
+	 	return courseService.editCourse(courseId, editCourse) ;
+	}
+	@GetMapping("/getCourseByAcademyName/{academyId}")
+	public List<Course> viewCourseByAcademyName(@PathVariable int academyId) {
+		return courseService.viewCourseByAcademyId(academyId);
+	}
+	@GetMapping("/viewCourse")
+	public List<Course> getAllCourse() {
+		return courseService.getAllCourse();
+	}
+	
+	@DeleteMapping("/deleteCourse/{id}")
     public String deleteCourse(@PathVariable int id) {
         return courseService.deleteCourse(id);
     }
 
-
-   
 }
-

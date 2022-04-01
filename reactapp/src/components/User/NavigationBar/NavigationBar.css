@@ -1,0 +1,47 @@
+.nav {
+    padding: 1vh;
+    background-color: #21709e;
+    text-align: center;
+    box-shadow: 1px 1px 15px #3628748a;
+  }
+  .navbar-link {
+    margin-left: 24vw;
+    padding: 1vh;
+    text-align: center;
+  }
+  .navbar-link a {
+    margin-left: 0.5vw;
+    margin-right: 2vw;
+    color: white;
+    text-decoration: none;
+  }
+  .navbar-link img:hover {
+    transform: scale(1.1);
+  }
+  .navbar-link a:hover,
+  .nav-logout a:hover {
+    transform: scale(1.1);
+  }
+  .nav-logout {
+    margin-left: 27vw;
+  }
+  .nav-logout a {
+    margin-left: 0.5vw;
+    margin-right: 2vw;
+    color: white;
+    text-decoration: none;
+  }
+#userAcademySearch,
+#userCourseSearch {
+  border: none;
+  width: 10vh;
+  border-radius: 1vh;
+  height: 6vh;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #21709e;
+  box-shadow: 1px 1px 10px #3628748a;
+}

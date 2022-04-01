@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.artsandcrafts.model.EnrolledCourse;
 import com.artsandcrafts.model.Student;
-import com.artsandcrafts.request.StudentReq;
 import com.artsandcrafts.service.StudentService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -27,10 +26,25 @@ public class StudentController {
 	StudentService studentService;
 	
 	@PostMapping("/addStudent")
-	public Student addStudent(@RequestBody StudentReq student) {
+	public Student addStudent(@RequestBody Student student) {
 	    return studentService.addStudent(student);
 	}
 
+	@PutMapping("/addAdmission/{emailId}")
+	public Student enrolleCourse(@PathVariable String emailId, @RequestBody Student student) {
+	    return studentService.enrolleCourse(emailId, student);
+	} 
+	
+	@GetMapping("/checkAdmission/{emailId}/{courseID}")
+	public Boolean checkAdmission(@PathVariable String emailId, @PathVariable int courseID) {
+	    Boolean bool =  studentService.checkAdmission(emailId, courseID);
+	    if(bool) {
+	    	return true;
+	    }else {
+	    	return false;
+	    }
+	} 
+	
 	@PutMapping("/editStudent/{studentId}")
 	public Student editStudent(@PathVariable int studentId, @RequestBody Student student) {
 	    return studentService.editStudent(studentId, student);
@@ -42,8 +56,19 @@ public class StudentController {
     }
 	
 	@GetMapping("/findStudent/{id}")
-    public List<Student> findByStudentId(@PathVariable int id) {
+    public List<EnrolledCourse> findByStudentId(@PathVariable int id) {
         return studentService.findByStudentId(id);
+    }
+	
+	@GetMapping("/findByStudent/{id}")
+    public Student findByStudentIDs(@PathVariable int id) {
+        return studentService.findByStudentIDs(id);
+    }
+	
+	
+	@GetMapping("/getStudentId/{email}")
+    public Integer getStudentId(@PathVariable String email) {
+        return studentService.getStudentId(email);
     }
 	
 	@GetMapping("/viewStudent")

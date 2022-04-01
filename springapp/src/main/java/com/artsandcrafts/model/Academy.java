@@ -16,8 +16,22 @@ public class Academy {
 	private String academyMobileNo;
 	private String academyEmail;
 	private String academyImageUrl;
-	private int rating;
+	private double rating;
 	
+	public Academy() {
+
+	}
+	public Academy(int academyId, String academyName, String academyDescription, String academyLocation,
+			String academyMobileNo, String academyEmail, String academyImageUrl) {
+		super();
+		this.academyId = academyId;
+		this.academyName = academyName;
+		this.academyDescription = academyDescription;
+		this.academyLocation = academyLocation;
+		this.academyMobileNo = academyMobileNo;
+		this.academyEmail = academyEmail;
+		this.academyImageUrl = academyImageUrl;
+	}
 	public String getAcademyLocation() {
 		return academyLocation;
 	}
@@ -60,11 +74,10 @@ public class Academy {
 	public void setAcademyEmail(String academyEmail) {
 		this.academyEmail = academyEmail;
 	}
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
-	
 }

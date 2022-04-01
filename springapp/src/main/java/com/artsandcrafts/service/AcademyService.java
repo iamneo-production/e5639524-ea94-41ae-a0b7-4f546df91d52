@@ -8,7 +8,7 @@ public interface AcademyService {
 
 	public Academy addAcademy(Academy academy);
 
-	public List<Academy> findByAcademyName(String academyName);
+	public Academy findByAcademyName(String academyName);
 
 	public Academy findByAcademyId(int academyId);
 
@@ -17,5 +17,7 @@ public interface AcademyService {
 	public String deleteAcademy(int id);
 
 	public Academy editAcademy(int academyId, Academy academy);
+
+	public Boolean existsByAcademyName(String academyName);
 
 }

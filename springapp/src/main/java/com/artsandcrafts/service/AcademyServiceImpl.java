@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.artsandcrafts.dao.AcademyRepo;
+import com.artsandcrafts.dao.CourseRepo;
 import com.artsandcrafts.model.Academy;
+import com.artsandcrafts.model.Course;
 
 @Service
 public class AcademyServiceImpl implements AcademyService {
 	@Autowired
 	AcademyRepo academyRepo;
+	@Autowired
+	CourseRepo courseRepo;
 
 	@Override
 	public Academy addAcademy(Academy academy) {
@@ -20,7 +24,7 @@ public class AcademyServiceImpl implements AcademyService {
 	}
 
 	@Override
-	public List<Academy> findByAcademyName(String academyName) {
+	public Academy findByAcademyName(String academyName) {
 		return academyRepo.findByAcademyName(academyName);
 	}
 	@Override
@@ -35,6 +39,8 @@ public class AcademyServiceImpl implements AcademyService {
 
 	@Override
 	public String deleteAcademy(int id) {
+		List<Course> course = courseRepo.findByAcademyAcademyId(id);
+		courseRepo.deleteAll(course);
 		academyRepo.deleteById(id);
 		return "Deleted id " +id ;
 	}
@@ -80,4 +86,10 @@ public class AcademyServiceImpl implements AcademyService {
 	
 		return academyRepo.save(update);
 	}
+
+	@Override
+	public Boolean existsByAcademyName(String academyName) {
+		return academyRepo.existsByAcademyName(academyName);
+	}
+	
 }
